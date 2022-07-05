@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.23.1)
 
-project(cpp_template)
+project(qttest)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+qt_standard_project_setup()
 
 # declare the library 
 add_executable(${PROJECT_NAME})
@@ -19,6 +22,10 @@ set_target_properties(${PROJECT_NAME}
 # add sources
 add_subdirectory(deps)
 add_subdirectory(src)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+
+
 
 # compile options
 target_compile_options(${PROJECT_NAME} PUBLIC
